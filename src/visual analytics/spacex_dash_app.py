@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 
 # Read the airline data into pandas dataframe
-spacex_df = pd.read_csv("spacex_launch_dash.csv")
+spacex_df = pd.read_csv("src/visual analytics/spacex_launch_dash.csv")
 max_payload = spacex_df['Payload Mass (kg)'].max()
 min_payload = spacex_df['Payload Mass (kg)'].min()
 
@@ -90,11 +90,11 @@ def update_payload_scatter_chart(entered_site, payload_range):
                             (spacex_df['Payload Mass (kg)'] <= payload_range[1])]
     
     if entered_site == 'ALL':
-        fig = px.scatter(filtered_df, x='Payload Mass (kg)', y='class', color='Booster Version Category')
+        fig = px.scatter(filtered_df, x='Payload Mass (kg)', y='class', color='Booster Version Category', size='Payload Mass (kg)')
 
     else:
         filtered_df = filtered_df[filtered_df['Launch Site'] == entered_site]
-        fig = px.scatter(filtered_df, x='Payload Mass (kg)', y='class', color='Booster Version Category')
+        fig = px.scatter(filtered_df, x='Payload Mass (kg)', y='class', color='Booster Version Category', size='Payload Mass (kg)')
     
     return fig
 
